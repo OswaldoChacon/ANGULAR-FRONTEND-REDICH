@@ -1,0 +1,82 @@
+<form
+    [formGroup]="formExperiencia"
+    (ngSubmit)="!editar == false ? registrarExperiencia() : actualizarExperiencia()"
+>
+    <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="16px"
+    >
+        <div fxFlex="50">
+            <label>Puesto</label>
+            <mat-form-field appearance="outline">
+                <input
+                    matInput
+                    formControlName="puesto"
+                >
+                <mat-error *ngIf="formExperiencia.get('puesto').hasError('required')">El campo puesto es obligatorio</mat-error>
+                <mat-error *ngIf="formExperiencia.get('puesto').hasError('serverError')">
+                    {{formExperiencia.get('empresas').errors?.serverError}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <label for="empresa">Empresa</label>
+            <mat-form-field appearance="outline">
+                <input
+                    matInput
+                    formControlName="empresa"
+                >
+                <mat-error *ngIf="formExperiencia.get('empresa').hasError('required')">El campo empresa es obligatorio</mat-error>
+                <mat-error *ngIf="formExperiencia.get('empresa').hasError('serverError')">
+                    {{formExperiencia.get('empresas').errors?.serverError}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutGap="16px"
+    >
+        <div fxFlex="50">
+            <label for="empresa">Fecha de inicio</label>
+            <mat-form-field appearance="outline">
+                <input
+                    matInput
+                    type="date"
+                    formControlName="fecha_inicio"
+                >
+                <mat-error *ngIf="formExperiencia.get('fecha_inicio').hasError('required')">La fecha de inicio es obligatorio</mat-error>
+                <mat-error *ngIf="formExperiencia.get('fecha_inicio').hasError('serverError')">
+                    {{formExperiencia.get('fecha_inicio').errors?.serverError}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50">
+            <label for="empresa">Fecha de salida</label>
+            <mat-form-field appearance="outline">
+                <input
+                    matInput
+                    type="date"
+                    formControlName="fecha_fin"
+                >
+                <mat-error *ngIf="formExperiencia.get('fecha_fin').hasError('required')">La fecha de salida es obligatoria</mat-error>
+                <mat-error *ngIf="formExperiencia.get('fecha_fin').hasError('serverError')">
+                    {{formExperiencia.get('fecha_fin').errors?.serverError}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <label>Actividades realizadas</label>
+    <mat-form-field appearance="outline">
+        <textarea
+            matInput
+            formControlName="actividades"
+        ></textarea>
+        <mat-error *ngIf="formExperiencia.get('actividades').hasError('required')">El campo actividades es obligatorio</mat-error>
+        <mat-error *ngIf="formExperiencia.get('actividades').hasError('serverError')">
+            {{formExperiencia.get('actividades').errors?.serverError}}
+        </mat-error>
+    </mat-form-field>
+</form>

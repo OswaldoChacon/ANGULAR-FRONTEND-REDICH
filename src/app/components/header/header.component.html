@@ -1,0 +1,77 @@
+<mat-toolbar class="color-primary">
+    <div
+        fxLayout="row"
+        fxFlex="100"
+        fxLayoutGap="20px"
+    >
+        <ng-content></ng-content>
+        <div fxLayoutAlign="start center">
+            <img
+                src="../../../assets/img/LogoHorizontalNegroRojo.svg"
+                alt="REDICH"
+                height="45"
+                width="100"
+            >
+        </div>
+        <mat-nav-list
+            fxLayout="row"
+            fxShow.gt-sm
+            fxHide
+        >
+            <a
+                mat-list-item
+                [routerLink]="['empleos']"
+                routerLinkActive="visited"
+                *ngxPermissionsOnly="['candidato','invitado']"
+            >
+                Buscar empleo
+            </a>
+            <a
+                mat-list-item
+                [routerLink]="['curriculo']"
+                routerLinkActive="visited"
+                *ngxPermissionsOnly="['candidato']"
+            >
+                Currículo
+            </a>
+            <a
+                mat-list-item
+                [routerLink]="['admin/registrar-vacante']"
+                routerLinkActive="visited"
+                *ngxPermissionsOnly="['admin']"
+            >
+                Registrar empleo
+            </a>
+            <a
+                mat-list-item
+                [routerLink]="['admin/postulantes']"
+                routerLinkActive="visited"
+                *ngxPermissionsOnly="['admin']"
+            >
+                Postulantes
+            </a>
+        </mat-nav-list>
+        <span class="flex-right"></span>
+        <div fxLayoutAlign="end center">
+            <button
+                mat-button
+                routerLink="cuenta/registro"
+                routerLinkActive="active"
+                *ngIf="!token"
+            >
+                CREAR CUENTA
+            </button>
+            <button
+                mat-button
+                [matMenuTriggerFor]="menuLogin"
+                *ngIf="!token"
+            >
+                INICIAR SESIÓN
+            </button>
+            <mat-menu #menuLogin="matMenu">
+                <app-login></app-login>
+            </mat-menu>
+            <app-menu></app-menu>
+        </div>
+    </div>
+</mat-toolbar>

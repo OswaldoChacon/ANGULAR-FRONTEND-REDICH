@@ -1,0 +1,179 @@
+<div
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutGap="16px"
+>
+    <div
+        fxFlex="30"
+        fxLayout="column"
+        fxLayoutGap="16px"
+    >
+    <app-card-profile [usuario]="usuario"></app-card-profile>
+        <!-- <mat-card>
+            <mat-card-header>
+                <mat-card-title>Datos personales</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div fxLayoutAlign="center center">
+                    <img
+                        class="img-perfil"
+                        src="../../../assets/img/no_photo.jpg"
+                        alt="Foto de perfil"
+                    >
+                </div>
+                <div
+                    fxLayout="column"
+                    fxLayoutAlign="center center"
+                >
+                    <h3>
+                        {{usuario.nombre + ' ' + usuario.apellidos| titlecase}}
+                    </h3>
+                    <p>
+                        {{getEdad(usuario.fecha_nacimiento) + ' años'}}
+                    </p>
+                    <p>{{usuario.email}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card> -->
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Currículo</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngIf="usuario.cv != null; else noCV">
+                    <div
+                        fxLayout="row"
+                        fxLayoutGap="12px"
+                        fxLayoutAlign="center center"
+                    >
+                        <p class="flex-right">{{usuario.cv}}</p>
+                        <button
+                            mat-icon-button
+                            (click)="eliminarCV(usuario.cv)"
+                        >
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <ng-template #noCV>
+                    <p>
+                        Adjunta tu currículo en Word/PDF para conocer más sobre ti.
+                    </p>
+                    <input
+                        fxHide
+                        type="file"
+                        (change)="onFileChanged($event)"
+                        #fileInput
+                    >
+                    <div fxLayoutGap="12px">
+                        <ng-container *ngIf="archivo">
+                            <button
+                                mat-raised-button
+                                color="primary"
+                                (click)="subirCV()"                                
+                            >
+                                Guardar
+                            </button>
+                            <button
+                                mat-raised-button
+                                (click)="archivo = null"                                
+                            >
+                                Cancelar
+                            </button>
+                        </ng-container>
+                        <button
+                            mat-icon-button
+                            color="warn"
+                            (click)="fileInput.click()"
+                            *ngIf="!archivo"
+                        >
+                            <mat-icon>add_circle</mat-icon>
+                            AGREGAR
+                        </button>
+                    </div>
+                </ng-template>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div
+        fxFlex="70"
+        fxLayout="column"
+    >
+        <mat-card>
+            <mat-card-header>
+                <div
+                    fxLayout="row"
+                    fxFlex="100"
+                >
+                    <mat-card-title class="flex-right">Experiencas laborales</mat-card-title>
+                    <button
+                        mat-icon-button
+                        color="warn"
+                        fxLayoutAlign="end start"
+                        (click)="agregar = !agregar"
+                        *ngIf="!agregar"
+                    >
+                        <mat-icon>add_circle</mat-icon>
+                        AGREGAR
+                    </button>
+                    <button
+                        mat-icon-button
+                        fxLayoutAlign="end start"
+                        *ngIf="agregar && experienciaActual"
+                        (click)="eliminarExperiencia()"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngIf="!agregar; else agregarExperiencia">
+                    <div *ngIf="experiencias.length; else sinExperiencia">
+                        <div
+                            *ngFor="let experiencia of experiencias"
+                            class="experiencia-container"
+                            (click)="editarExperiencia(experiencia)"
+                        >
+                            <h3>{{experiencia.empresa}}</h3>
+                            <mat-card-subtitle>
+                                {{experiencia.fecha_inicio | date :'longDate'}} -
+                                        {{experiencia.fecha_fin | date :'longDate'}}
+                            </mat-card-subtitle>
+                            <p>{{experiencia.actividades}}</p>
+                        </div>
+                    </div>
+                    <ng-template #sinExperiencia>
+                        <app-alerta [mensaje]="'Sin experiencias'"></app-alerta>
+                    </ng-template>
+                </div>
+                <ng-template #agregarExperiencia>
+                    <app-registrar-experiencia
+                        [experiencia]="experienciaActual"
+                        (guardando)="agregar=!$event"
+                        #form
+                    >
+                    </app-registrar-experiencia>
+                </ng-template>
+            </mat-card-content>
+            <mat-card-actions
+                *ngIf="agregar"
+                align="end"
+            >
+                <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="registrarExperiencia()"
+                >
+                    Guardar
+                </button>
+                <button
+                    mat-raised-button
+                    (click)="cancelar()"
+                >
+                    Cancelar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

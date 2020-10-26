@@ -1,0 +1,165 @@
+<form
+    [formGroup]="formVacante"
+    (ngSubmit)="registrarVacante()"
+    #form="ngForm"
+>
+    <div
+        fxLayout="row"
+        fxLayout.lt-md="column"
+        fxLayoutGap="40px"
+    >
+        <div fxFlex="50">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Registro de vacante</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div
+                        fxLayout="row"
+                        fxLayoutGap="12px"
+                    >
+                        <div fxFlex="50">
+                            <label>Titulo</label>
+                            <mat-form-field appearance="outline">
+                                <input
+                                    matInput
+                                    formControlName="titulo"
+                                    required
+                                >
+                                <mat-error *ngIf="formVacante.get('titulo').hasError('required')">El campo titulo es obligatorio</mat-error>
+                                <mat-error *ngIf="formVacante.get('titulo').hasError('serverError')">
+                                    {{formVacante.get('titulo').errors?.serverError}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50">
+                            <label>Empresa</label>
+                            <mat-form-field appearance="outline">
+                                <input
+                                    matInput
+                                    formControlName="empresa"
+                                    required
+                                >
+                                <mat-error *ngIf="formVacante.get('empresa').hasError('required')">El campo empresa es obligatorio</mat-error>
+                                <mat-error *ngIf="formVacante.get('empresa').hasError('serverError')">
+                                    {{formVacante.get('empresa').errors?.serverError}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div
+                        fxLayout="row"
+                        fxLayoutGap="12px"
+                    >
+                        <div fxFlex="50">
+                            <label>Sueldo</label>
+                            <mat-form-field appearance="outline">
+                                <input
+                                    matInput
+                                    type="number"
+                                    formControlName="sueldo"
+                                    required
+                                >
+                                <mat-icon matSuffix>attach_money</mat-icon>
+                                <mat-error *ngIf="formVacante.get('sueldo').hasError('required')">El campo sueldo es obligatorio</mat-error>
+                                <mat-error *ngIf="formVacante.get('sueldo').hasError('serverError')">
+                                    {{formVacante.get('sueldo').errors?.serverError}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="50">
+                            <label>Sexo</label>
+                            <mat-form-field appearance="outline">
+                                <mat-select
+                                    formControlName="sexo"
+                                    required
+                                >
+                                    <mat-option value="Masculino">Masculino</mat-option>
+                                    <mat-option value="Femenino">Femenino</mat-option>
+                                    <mat-option value="INdistinto">Indistinto</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="formVacante.get('sexo').hasError('required')">El campo sexo es obligatorio</mat-error>
+                                <mat-error *ngIf="formVacante.get('sexo').hasError('serverError')">
+                                    {{formVacante.get('sexo').errors?.serverError}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <label>Fecha de publicacioón</label>
+                    <mat-form-field appearance="outline">
+                        <input
+                            matInput
+                            type="date"
+                            formControlName="fecha_publicacion"
+                            required
+                        >
+                        <mat-error *ngIf="formVacante.get('fecha_publicacion').hasError('required')">
+                            El campo fecha de publicación es obligatorio
+                        </mat-error>
+                        <mat-error *ngIf="formVacante.get('fecha_publicacion').hasError('serverError')">
+                            {{formVacante.get('sexo').errors?.serverError}}
+                        </mat-error>
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button
+                        mat-raised-button
+                        color="warn"
+                        [disabled]="form.invalid"
+                        >
+                        <!-- (click)="form.ngSubmit.emit()" -->
+                        Guardar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div fxFlex="50">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Requisitos</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayoutAlign="end start">
+                    <button
+                        mat-raised-button
+                        type="button"
+                        (click)="agregarRequisito()"
+                    >
+                        Agregar requisito
+                    </button>
+                </div>
+                    <div
+                        formArrayName="requisitos"
+                        *ngFor="let item of requisitos.controls; let i=index"
+                    >
+                        <div
+                            [formGroupName]="i"
+                            fxLayout="row"
+                            fxLayoutAlign="start center"
+                        >
+                            <div class="flex-right">
+                                <label>Requisito</label>
+                                <mat-form-field appearance="outline">
+                                    <input
+                                        matInput
+                                        formControlName="nombre"
+                                        required
+                                    >
+                                </mat-form-field>
+                            </div>
+                            <button
+                                type="button"
+                                mat-icon-button
+                                (click)="removerRequisito(i)"
+                            >
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+        </div>
+    </div>
+</form>

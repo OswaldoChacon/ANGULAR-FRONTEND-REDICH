@@ -1,0 +1,78 @@
+<!-- <mat-card style="height: 100%;">
+    <mat-card-header>
+        <mat-card-title>Iniciar sesión</mat-card-title>    
+    </mat-card-header>
+    <mat-card-content>
+    
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-raised-button color="warn" (click)="form.ngSubmit().emit()">Crear cuenta</button>
+    </mat-card-actions>
+</mat-card> -->
+
+
+
+
+<div
+    style="padding:20px"
+    fxLayout="column"
+    fxLayoutGap="12px"
+    (click)="$event.stopPropagation();"
+>
+    <div>
+        <form
+            [formGroup]="formLogin"
+            (ngSubmit)="login()"
+            #form="ngForm"
+            (keydown.tab)="$event.stopPropagation()"
+        >
+            <!-- <label>Correo electronico</label> -->
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electronico</mat-label>
+                <input
+                    matInput
+                    formControlName="email"
+                    placeholder="ejemplo@ejemplo.com"
+                >
+                <mat-error *ngIf="formLogin.get('email').hasError('required')">El campo email es obligatorio</mat-error>
+            </mat-form-field>
+            <!-- <label>Contraseña</label> -->
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input
+                    [type]="hide ? 'password':'text'"
+                    matInput
+                    formControlName="password"
+                >
+                <mat-icon
+                    matSuffix
+                    (click)="hide = !hide"
+                    class="lock-password"
+                >
+                    {{hide ? 'visibility':'visibility_off'}}
+                </mat-icon>
+                <mat-error *ngIf="formLogin.get('email').hasError('required')">El campo contraseña es obligatorio</mat-error>
+            </mat-form-field>
+        </form>
+    </div>
+    <div
+        fxLayoutAlign="center center"
+        fxLayout="column"
+        fxLayoutGap="12px"
+    >
+        <button
+            mat-raised-button
+            color="warn"
+            (click)="form.ngSubmit.emit()"
+            *ngIf="!token"
+        >
+            Iniciar sesión
+        </button>
+        <a
+            mat-list-item
+            routerLink="cuenta/recuperar_contrasena"
+        >
+            Olvidé mi contraseña
+        </a>
+    </div>
+</div>

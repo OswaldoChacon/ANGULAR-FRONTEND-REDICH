@@ -1,0 +1,73 @@
+<div
+    fxLayout.gt-sm="row"
+    fxLayout="column"
+    fxLayoutGap="16px"
+>
+    <div fxFlex="25">
+        <mat-card>
+            <mat-card-header>
+                <div
+                    fxLayout="row"
+                    fxFlex="100"
+                >
+                    <mat-card-title fxFlex="50">Filtros</mat-card-title>                   
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <label>Empresa</label>
+                <mat-form-field appearance="outline">
+                    <input
+                        matInput
+                        placeholder="Empresa"
+                        [(ngModel)]="empresa"
+                    >
+                </mat-form-field>
+                <label>Edad</label>
+                <mat-form-field appearance="outline">
+                    <input
+                        matInput
+                        type="number"
+                        placeholder="Edad"
+                        [(ngModel)]="edad"
+                    >
+                </mat-form-field>
+                <label>Fecha de postulación</label>
+                <mat-form-field appearance="outline">
+                    <input
+                        type="date"
+                        matInput
+                        placeholder="Fecha de postulación"
+                        [(ngModel)]="fecha_postulacion"
+                    >
+                </mat-form-field>
+                <label>Sexo</label>
+                <mat-form-field appearance="outline">
+                    <mat-select [(ngModel)]="sexo">
+                        <mat-option value="Masculino">Masculino</mat-option>
+                        <mat-option value="Femenino">Femenino</mat-option>
+                        <mat-option value="Indistinto">Indistinto</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions align="center">
+                <button
+                    mat-raised-button
+                    color="warn"
+                    (click)="getPostulantes()"
+                >
+                    Filtrar búsqueda
+                </button>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+    <div fxFlex="75">
+        <div *ngIf="postulantes.length; else sinPostulantes" fxLayout="row wrap" fxLayoutGap="16px">
+            <app-card-profile *ngFor="let postulante of postulantes" [usuario]="postulante"></app-card-profile>            
+        </div>
+        <ng-template #sinPostulantes>
+            <app-alerta [mensaje]="'No se han encontrado postulantes'"></app-alerta>
+        </ng-template>
+
+    </div>
+</div>

@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin     : 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+mat-form-field {
+    width     : 100%;
+    margin-top: 8px
+}
+
+mat-card-actions {
+    margin-bottom: 0px !important;
+}
+
+mat-slider {
+    width: 100%;
+}
+
+.mat-card-header-text {
+    margin: 0 !important;
+}
+
+.flex-right {
+    flex: 1 1 auto;
+}
+
+mat-paginator{
+    background-color: transparent !important;
+}

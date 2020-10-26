@@ -1,0 +1,27 @@
+.clean-filtro {
+    color        : red;
+    padding-right: 16px;
+}
+
+.card-without-padding {
+    padding: 0 !important;
+}
+
+mat-card-title {
+    font-size: 18px;
+}
+
+mat-icon {
+    color: #4C4C4C;
+}
+mat-card-content{
+    margin: 0 !important;
+}
+
+.vacante-details, mat-card-actions{
+    padding: 16px !important;
+}
+
+.container-img {
+    background-color: #F7F7F7;    
+}

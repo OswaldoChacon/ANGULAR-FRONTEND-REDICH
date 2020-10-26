@@ -1,0 +1,24 @@
+<div
+    fxLayout="row"
+    fxLayoutGap="16px"
+    >    
+    <div
+        fxFlex="45"
+        fxLayoutAlign="center center"
+        style="height: 400px;"
+        fxShow.gt-sm
+        fxHide
+        >
+        <img
+            src="../../assets/img/logo-red-black.svg"
+            alt="Logo REDICH"
+        >
+    </div>
+    <div
+        fxFlex="45"
+        fxFlex.lt-md="100"
+        fxLayoutAlign="center center"
+    >
+        <router-outlet></router-outlet>
+    </div>
+</div>

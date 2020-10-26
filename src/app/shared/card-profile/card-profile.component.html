@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Datos personales</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div fxLayoutAlign="center center">
+            <img
+                class="img-perfil"
+                src="../../../assets/img/no_photo.jpg"
+                alt="Foto de perfil"
+            >
+        </div>
+        <div
+            fxLayout="column"
+            fxLayoutAlign="center center"
+        >
+            <h3>
+                {{usuario.nombre + ' ' + usuario.apellidos| titlecase}}
+            </h3>
+            <p>
+                {{usuario.edad + ' años'}}
+            </p>
+            <p>{{usuario.email}}</p>
+        </div>
+    </mat-card-content>
+</mat-card>
