@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
-import { environment } from '../../environments/environment';
+
 import { Usuario } from '../models/usuario.model';
 import { catchError, tap } from 'rxjs/operators';
 import { Vacante } from '../models/Vacante.model';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
-const API_URL = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +25,7 @@ export class UsuarioService {
     );
   }
 
-  eliminarCV(nombreArchivo: string) {
+  eliminarCV(nombreArchivo:string) {
     return this.http.delete(`api/candidatos/CV/${nombreArchivo}`).pipe(
       tap(() => {
         this.setUsuario();        
@@ -35,7 +34,7 @@ export class UsuarioService {
   }
 
   datosPersonales() {
-    return this.http.get<Usuario>('api/datos_personales').pipe(
+    return this.http.get<Usuario>(`api/datos_personales`).pipe(
       tap(resp => localStorage.setItem('perfil', JSON.stringify(resp)))
     );
   }

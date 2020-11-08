@@ -5,9 +5,9 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ExperienciaService } from 'src/app/services/experiencia.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { environment } from '../../../environments/environment';
 
-const API_URL = environment.base_url;
+
+
 @Component({
   selector: 'app-curriculo',
   templateUrl: './curriculo.component.html',

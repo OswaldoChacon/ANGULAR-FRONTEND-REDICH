@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from "@angular/common/http";
 
-import { environment } from '../../environments/environment';
+
 import { catchError, tap } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
@@ -10,7 +10,6 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { FormGroup } from '@angular/forms';
 import { FormErrorService } from './form-error.service';
 
-const API_URL = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +47,7 @@ export class AuthService {
   }
 
   cargarPermisos() {
+    this.ngxPermissionsService.flushPermissions();
     if (!this.token)
       this.ngxPermissionsService.addPermission('invitado');
     else if (this.isAdmin)
@@ -58,9 +58,10 @@ export class AuthService {
 
   logout() {
     this.ngxPermissionsService.flushPermissions();
+    this.ngxPermissionsService.addPermission('invitado');
     localStorage.clear();
     this.router.navigate(['empleos']);
-    window.location.reload();
+    // window.location.reload();
   }
 
   get token(): string {
@@ -75,10 +76,8 @@ export class AuthService {
   redirect() {
     if (!this.token)
       this.logout()
-    else if (this.isAdmin) {
-      this.router.navigate(['admin']);
-      console.log("admi");
-    }
+    else if (this.isAdmin) 
+      this.router.navigate(['admin/registrar-vacante']);          
     else
       this.router.navigate(['curriculo']);
   }

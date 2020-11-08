@@ -22,7 +22,7 @@ const routes: Routes = [
       },
       {
         path:'**',
-        redirectTo:'vacantes'
+        redirectTo:'registrar-vacante'
       }
     ]
   }
